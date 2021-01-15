@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        width: 80px;
+        height: 40px;
+      }
+      #box {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        position: absolute;
+        top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">开关</button>
+    <div id="box"></div>
+    <script>
+      var btn = document.getElementById("btn");
+      var box = document.getElementById("box");
+      // var num = 0;
+      var timer = null;
+      btn.onclick = function () {
+        //先关闭定时器，然后再打开，防止定时器累加
+        clearInterval(timer);
+        timer = setInterval(function () {
+          //  num++;
+          //  box.style.left = num + 'px';
+          if (box.offsetLeft === 500) {
+            clearInterval(timer);
+            return;
+          }
+          box.style.left = box.offsetLeft + 10 + "px";
+        }, 30);
+      };
+    </script>
+  </body>
+</html>
