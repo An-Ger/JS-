@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #box {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: relative;
+        left: -200px;
+      }
+      #box span {
+        position: absolute;
+        width: 40px;
+        height: 60px;
+        background-color: #000000;
+        right: -40px;
+        color: #fff;
+        top: 50%;
+        margin-top: -30px;
+        line-height: 60px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"><span>Pull </span></div>
+    <script>
+      window.onload = function () {
+        var box = document.getElementById("box");
+        var timer = null, speed = 0;
+        // box.onmouseover = function () {
+        //   clearInterval(timer);
+        //   timer = setInterval(function () {
+        //     if (box.offsetLeft == 0) {
+        //       clearInterval(timer);
+        //       return;
+        //     }
+        //     box.style.left = box.offsetLeft + 5 + "px";
+        //   }, 30);
+        // };
+        // box.onmouseout = function () {
+        //   clearInterval(timer);
+        //   timer = setInterval(function () {
+        //     if (box.offsetLeft == -200) {
+        //       clearInterval(timer);
+        //       return;
+        //     }
+        //     box.style.left = box.offsetLeft - 5 + "px";
+        //   }, 30);
+        // };
+        box.onmouseover = function () {
+            startAnimation(this, 0)
+        };
+        box.onmouseout = function () {
+            startAnimation(this, -200)
+        };
+        function startAnimation(obj, end) {
+          clearInterval(timer);
+          speed = end > obj.offsetLeft ? 5 : -5;
+          timer = setInterval(function () {
+            if (box.offsetLeft == end) {
+              clearInterval(timer);
+              return;
+            }
+            box.style.left = box.offsetLeft + speed + "px";
+          }, 30);
+        }
+      };
+    </script>
+  </body>
+</html>
